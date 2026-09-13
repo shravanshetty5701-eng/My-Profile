@@ -1,24 +1,50 @@
-export interface WorkExperience {
-  id: string;
-  company: string;
-  role: string;
-  dates: string;
-  summary?: string;
-  bullets: string[];
-  technologies?: string[];
-}
+export type DualTrackCategory = 'all' | 'code' | 'community';
 
-export interface CommunityRole {
+export interface TimelineMilestone {
   id: string;
   title: string;
   organization: string;
   dates: string;
-  scale?: string;
-  responsibilities: string[];
-  reflection: string;
+  category: 'code' | 'community' | 'education';
+  badge: string;
+  summary: string;
+  bullets: string[];
+  tags: string[];
 }
 
-export interface SkillCategory {
+export interface SkillDemonstration {
+  id: string;
+  name: string;
+  category: 'Frontend' | 'Backend & Data' | 'Developer Tools';
+  description: string;
+  snippet: string;
+  demoType: 'angular' | 'react' | 'typescript' | 'javascript' | 'html-css' | 'tailwind' | 'node' | 'database' | 'git' | 'copilot';
+}
+
+export interface ProjectItem {
+  id: string;
   title: string;
-  skills: string[];
+  subtitle: string;
+  category: 'code' | 'community' | 'hybrid';
+  description: string;
+  whatBuilt: string;
+  whyBuilt: string;
+  technologies: string[];
+  githubUrl?: string;
+  liveDemoLabel?: string;
+  interactiveType: 'simulation' | 'logistics' | 'calculator' | 'todo';
+}
+
+export interface LeadershipRole {
+  id: string;
+  title: string;
+  organization: string;
+  dates: string;
+  scale: string;
+  skillsBuilt: {
+    name: string;
+    description: string;
+  }[];
+  responsibilities: string[];
+  reflection: string;
 }

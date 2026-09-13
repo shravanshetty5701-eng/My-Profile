@@ -5,9 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    // GitHub Pages serves this project from /My-Profile/. The workflow
-    // also provides VITE_BASE_PATH so the same config works if the repo is renamed.
-    base: process.env.VITE_BASE_PATH || '/My-Profile/',
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -1,123 +1,232 @@
-import { PERSONAL_INFO, KEY_FACTS } from '../data/portfolioData';
-import { ArrowDown, Mail, ArrowUpRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { Mail, Github, Linkedin, ArrowRight, Briefcase, Users, GraduationCap, Terminal, Heart, Layers, Compass } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 export default function Hero() {
   return (
-    <section id="hero" className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-slate-800/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Subtle Live Availability Status */}
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/80 text-xs text-slate-300 mb-6"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span className="font-medium">Open to front-end developer roles</span>
-          <span className="text-slate-500">•</span>
-          <span className="text-slate-400">Mumbai & Remote</span>
-        </motion.div>
+    <section id="hero" className="pt-28 pb-16 md:pt-36 md:pb-24 border-b border-indigo-950/40 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start mb-12">
+          {/* Main Narrative & Action Content */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Primary Name & Display Headline */}
+            <ScrollReveal delay={0.08} yOffset={20}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white font-display tracking-tight leading-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-300">
+                  {PERSONAL_INFO.preferredName}
+                </span>
+              </h1>
+            </ScrollReveal>
 
-        {/* Name and Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.05 }}
-          className="space-y-4"
-        >
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-100 font-display">
-            {PERSONAL_INFO.name}
-          </h1>
+            {/* Title: Front-End Developer & Community Builder */}
+            <ScrollReveal delay={0.18} yOffset={20}>
+              <div className="space-y-2">
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+                  <span>{PERSONAL_INFO.title}</span>
+                </h2>
+                {/* One-line hook capturing the dual identity */}
+                <p className="text-base sm:text-lg text-pink-300 font-medium font-mono border-l-2 border-pink-400/70 pl-3">
+                  &ldquo;{PERSONAL_INFO.hook}&rdquo;
+                </p>
+              </div>
+            </ScrollReveal>
 
-          <p className="text-xl sm:text-2xl font-medium text-sky-400">
-            {PERSONAL_INFO.title}
-          </p>
+            {/* Human Narrative Introduction */}
+            <ScrollReveal delay={0.24} yOffset={20}>
+              <div className="text-base text-slate-300 leading-relaxed font-normal">
+                <p>
+                  {PERSONAL_INFO.heroSubtitle}
+                </p>
+              </div>
+            </ScrollReveal>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl pt-2">
-            {PERSONAL_INFO.heroSubtitle}
-          </p>
-        </motion.div>
+            {/* Action Buttons & Direct Links: Clear CTA ("Explore My Work") */}
+            <ScrollReveal delay={0.3} yOffset={20}>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  id="hero-explore-btn"
+                  href="#experience"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-400 hover:to-indigo-500 active:scale-95 text-white text-sm font-bold transition-all shadow-xl shadow-pink-950/50 cursor-pointer"
+                >
+                  <span>Explore Experience</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
 
-        {/* Primary Call to Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.15 }}
-          className="flex flex-wrap items-center gap-3 pt-6 sm:pt-8"
-        >
-          <motion.a
-            id="hero-explore-work-btn"
-            href="#experience"
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-sky-600 hover:bg-sky-500 text-white font-medium text-sm transition-colors shadow-sm"
-          >
-            <span>Explore my work</span>
-            <ArrowDown className="w-4 h-4" />
-          </motion.a>
+                <a
+                  id="hero-contact-btn"
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#161836]/90 hover:bg-[#1f2249] active:scale-95 text-slate-200 text-sm font-semibold border border-indigo-400/25 transition-all backdrop-blur-sm cursor-pointer shadow-md"
+                >
+                  <Mail className="w-4 h-4 text-pink-400" />
+                  <span>Get In Touch</span>
+                </a>
 
-          <motion.a
-            id="hero-contact-btn"
-            href="#contact"
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium text-sm border border-slate-700 transition-colors"
-          >
-            <Mail className="w-4 h-4 text-slate-400" />
-            <span>Get in touch</span>
-          </motion.a>
+                <div className="flex items-center gap-2 sm:ml-2">
+                  <a
+                    href={PERSONAL_INFO.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full text-slate-200 hover:text-white hover:bg-indigo-900/40 active:scale-95 border border-indigo-400/20 text-xs font-medium transition-all backdrop-blur-sm"
+                    title="GitHub Profile"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
 
-          <motion.a
-            id="hero-linkedin-link"
-            href={PERSONAL_INFO.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md text-slate-400 hover:text-slate-200 text-sm font-medium hover:bg-slate-800/50 transition-colors"
-          >
-            <span>LinkedIn</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </motion.a>
-        </motion.div>
-
-        {/* Short, quiet introductory summary & key facts */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.25 }}
-          className="mt-12 pt-8 border-t border-slate-800/80"
-        >
-          <p className="text-sm text-slate-400 leading-relaxed max-w-3xl mb-6">
-            Based in Mumbai, India. Currently a Developer at BTS Strategy Alignment and Execution, where I build
-            interactive simulation applications in Angular. I focus on writing reliable, responsive UI and keeping
-            components easy to maintain.
-          </p>
-
-          {/* Understated 3 key facts */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            {KEY_FACTS.map((fact, idx) => (
-              <motion.div
-                key={fact.label}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.3 + idx * 0.08 }}
-                className="py-3 border-l-2 border-slate-700 pl-3.5 hover:border-sky-500/80 transition-colors"
-              >
-                <div className="text-base font-semibold text-slate-100">
-                  {fact.value}
+                  <a
+                    href={PERSONAL_INFO.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full text-slate-200 hover:text-white hover:bg-indigo-900/40 active:scale-95 border border-indigo-400/20 text-xs font-medium transition-all backdrop-blur-sm"
+                    title="LinkedIn Profile"
+                  >
+                    <Linkedin className="w-4 h-4 text-indigo-300" />
+                    <span>LinkedIn</span>
+                  </a>
                 </div>
-                <div className="text-xs text-slate-400 mt-0.5">
-                  {fact.label}
-                </div>
-              </motion.div>
-            ))}
+              </div>
+            </ScrollReveal>
           </div>
-        </motion.div>
+
+          {/* Right Side: Subtle Code/Dev Visual Motif */}
+          <div className="lg:col-span-5 w-full">
+            <ScrollReveal delay={0.25} yOffset={24}>
+              <div className="p-6 rounded-2xl border border-indigo-400/25 bg-[#141733]/90 backdrop-blur-md shadow-2xl space-y-5">
+                {/* Code Terminal Visual Motif */}
+                <div className="flex items-center justify-between pb-3 border-b border-indigo-900/40">
+                  <div className="flex items-center gap-2 text-xs font-mono text-pink-400 font-bold uppercase tracking-wider">
+                    <Terminal className="w-4 h-4" />
+                    <span>runtime-manifest.ts</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-300 font-semibold px-2.5 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/50 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>ONLINE (PROD)</span>
+                  </span>
+                </div>
+
+                {/* Subtle dev motif code preview */}
+                <div className="p-3.5 rounded-xl bg-[#090b1c] border border-indigo-950 font-mono text-xs text-slate-300 space-y-1.5">
+                  <div className="text-slate-500">// Dual-core operating instance</div>
+                  <div>
+                    <span className="text-pink-400">const</span>{' '}
+                    <span className="text-purple-300">shravan</span> = {'{'}
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-indigo-300">role:</span>{' '}
+                    <span className="text-amber-300">&quot;Front-End Developer&quot;</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-indigo-300">community:</span>{' '}
+                    <span className="text-amber-300">&quot;Mandal Head &bull; 500+ attendees&quot;</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-indigo-300">experience:</span>{' '}
+                    <span className="text-emerald-400">3.4</span>,
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-indigo-300">status:</span>{' '}
+                    <span className="text-pink-300">&quot;ready to ship&quot;</span>
+                  </div>
+                  <div>{'};'}</div>
+                </div>
+
+                {/* Focus Items */}
+                <div className="space-y-3 text-xs sm:text-sm">
+                  <div className="p-3.5 rounded-xl bg-[#0f1128]/80 border border-indigo-400/15 space-y-1 hover:border-indigo-400/30 transition-colors">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <div className="p-1 rounded-lg bg-indigo-500/20 text-indigo-300">
+                        <Layers className="w-4 h-4" />
+                      </div>
+                      <span>Front-End Engineering (BTS)</span>
+                    </div>
+                    <p className="text-slate-300 leading-relaxed font-normal text-xs pl-7">
+                      High-performance Angular interfaces, RxJS reactive pipelines, and decision simulations.
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-[#0f1128]/80 border border-indigo-400/15 space-y-1 hover:border-pink-400/30 transition-colors">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <div className="p-1 rounded-lg bg-pink-500/20 text-pink-300">
+                        <Compass className="w-4 h-4" />
+                      </div>
+                      <span>Community Leadership</span>
+                    </div>
+                    <p className="text-slate-300 leading-relaxed font-normal text-xs pl-7">
+                      Leading Ganpati Mandal (500+ attendees), BTS cultural events, and college fest operations.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tech Badges */}
+                <div className="pt-2 border-t border-indigo-900/40">
+                  <div className="text-xs font-mono text-indigo-300 font-medium mb-2.5 flex items-center gap-1.5">
+                    <Heart className="w-3.5 h-3.5 text-pink-400" />
+                    <span>Daily Tools:</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { name: 'Angular', color: 'bg-red-500/15 text-red-300 border-red-500/30' },
+                      { name: 'TypeScript', color: 'bg-blue-500/15 text-blue-300 border-blue-500/30' },
+                      { name: 'RxJS', color: 'bg-pink-500/15 text-pink-300 border-pink-500/30' },
+                      { name: 'React', color: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' },
+                      { name: 'Tailwind CSS', color: 'bg-teal-500/15 text-teal-300 border-teal-500/30' },
+                      { name: 'Node.js', color: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
+                      { name: 'Git', color: 'bg-orange-500/15 text-orange-300 border-orange-500/30' },
+                    ].map((tech) => (
+                      <span
+                        key={tech.name}
+                        className={`text-xs font-mono px-2.5 py-1 rounded-full border ${tech.color} font-medium`}
+                      >
+                        {tech.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+
+        {/* Clean Grounded Highlights Strip with Entry Animation */}
+        <ScrollReveal delay={0.35} yOffset={20}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-indigo-950/40">
+            <div className="p-4 rounded-2xl bg-[#141733]/80 backdrop-blur-md border border-indigo-400/20 hover:border-indigo-400/40 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs text-indigo-300 font-mono font-semibold mb-1">
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>EXPERIENCE</span>
+              </div>
+              <div className="text-base font-bold text-white">3.4+ Years</div>
+              <div className="text-xs text-slate-300 font-medium mt-0.5">Angular &bull; TypeScript &bull; RxJS</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#141733]/80 backdrop-blur-md border border-indigo-400/20 hover:border-pink-400/40 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs text-pink-300 font-mono font-semibold mb-1">
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>ROLE AT BTS</span>
+              </div>
+              <div className="text-base font-bold text-white">Developer</div>
+              <div className="text-xs text-slate-300 font-medium mt-0.5">Promoted from Associate</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#141733]/80 backdrop-blur-md border border-indigo-400/20 hover:border-amber-400/40 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs text-amber-300 font-mono font-semibold mb-1">
+                <Users className="w-3.5 h-3.5" />
+                <span>COMMUNITY</span>
+              </div>
+              <div className="text-base font-bold text-white">500+ Attendees</div>
+              <div className="text-xs text-slate-300 font-medium mt-0.5">Mandal Head &bull; 10+ Volunteers</div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#141733]/80 backdrop-blur-md border border-indigo-400/20 hover:border-emerald-400/40 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs text-emerald-300 font-mono font-semibold mb-1">
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>EDUCATION</span>
+              </div>
+              <div className="text-base font-bold text-white">8.5 CGPA</div>
+              <div className="text-xs text-slate-300 font-medium mt-0.5">BSc CS, Univ. of Mumbai</div>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

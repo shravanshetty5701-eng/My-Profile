@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { TIMELINE_MILESTONES } from '../data/portfolioData';
 import { DualTrackCategory } from '../types';
-import { Code2, Users, GraduationCap, Calendar, Clock, Briefcase } from 'lucide-react';
+import { Calendar, Briefcase, Users } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 export default function DualTimeline() {
   const [filter, setFilter] = useState<DualTrackCategory>('all');
@@ -15,128 +15,123 @@ export default function DualTimeline() {
   });
 
   return (
-    <section id="experience" className="py-16 md:py-24 border-b border-slate-800/80 bg-[#0a0d14]/50">
+    <section id="experience" className="py-16 md:py-24 border-b border-indigo-950/40 bg-[#0c0e20]/40">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header & Filter Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/20 text-xs font-mono text-sky-400 mb-2">
-              <Clock className="w-3.5 h-3.5" />
-              <span>PARALLEL GROWTH • 2019 — PRESENT</span>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#161836]/90 text-xs font-mono text-purple-300 mb-2 border border-indigo-400/25">
+                <Briefcase className="w-3.5 h-3.5 text-pink-400" />
+                <span>CAREER &amp; COMMUNITY JOURNEY 🚀</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-display tracking-tight">
+                Experience &amp; Milestones
+              </h2>
+              <p className="text-sm sm:text-base text-indigo-200/90 mt-1 max-w-xl font-normal leading-relaxed">
+                Parallel progression: delivering production front-end code at BTS while simultaneously directing large-scale community initiatives in Mumbai.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-bold text-slate-100 font-display">
-              Dual Experience Timeline
-            </h2>
-            <p className="text-sm text-slate-400 mt-1 max-w-xl">
-              Parallel development: sharpening technical architecture in production while exercising on-ground community leadership in parallel.
-            </p>
-          </div>
 
-          {/* Filter Pills */}
-          <div className="flex bg-[#111622] p-1 rounded-lg border border-slate-800">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors ${
-                filter === 'all' ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              All Tracks
-            </button>
-            <button
-              onClick={() => setFilter('code')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors flex items-center gap-1.5 ${
-                filter === 'code' ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Code2 className="w-3 h-3 text-sky-300" />
-              <span>Engineering</span>
-            </button>
-            <button
-              onClick={() => setFilter('community')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors flex items-center gap-1.5 ${
-                filter === 'community' ? 'bg-amber-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Users className="w-3 h-3 text-amber-300" />
-              <span>Community</span>
-            </button>
+            {/* Filter Segmented Control */}
+            <div className="flex bg-[#12142d] p-1 rounded-full border border-indigo-400/25 self-start md:self-auto shadow-sm">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold cursor-pointer active:scale-95 transition-all ${
+                  filter === 'all'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilter('code')}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold cursor-pointer active:scale-95 transition-all flex items-center gap-1.5 ${
+                  filter === 'code'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                <Briefcase className="w-3 h-3" />
+                <span>Engineering</span>
+              </button>
+              <button
+                onClick={() => setFilter('community')}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold cursor-pointer active:scale-95 transition-all flex items-center gap-1.5 ${
+                  filter === 'community'
+                    ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-sm'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                <Users className="w-3 h-3" />
+                <span>Community</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        {/* Chronological Timeline Track */}
-        <div className="relative border-l-2 border-slate-800 ml-4 sm:ml-6 space-y-10 pl-6 sm:pl-8">
-          {filteredMilestones.map((milestone, idx) => {
+        {/* Chronological Timeline List */}
+        <div className="space-y-4">
+          {filteredMilestones.map((milestone, index) => {
             const isCode = milestone.category === 'code';
             const isCommunity = milestone.category === 'community';
-            const isEducation = milestone.category === 'education';
 
-            const dotColor = isCode ? 'bg-sky-500 border-sky-300' : isCommunity ? 'bg-amber-500 border-amber-300' : 'bg-emerald-500 border-emerald-300';
-            const badgeBg = isCode ? 'bg-sky-500/10 text-sky-400 border-sky-500/20' : isCommunity ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+            const badgeColor = isCode 
+              ? 'bg-indigo-500/15 text-indigo-300 border-indigo-400/30' 
+              : isCommunity 
+                ? 'bg-pink-500/15 text-pink-300 border-pink-400/30' 
+                : 'bg-emerald-500/15 text-emerald-300 border-emerald-400/30';
 
             return (
-              <motion.div
-                key={milestone.id}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="relative group"
-              >
-                {/* Visual Node on Timeline Line */}
-                <div 
-                  className={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 ${dotColor} bg-[#0d1117] transition-transform group-hover:scale-125`} 
-                />
-
-                {/* Card Container */}
-                <div className="rounded-xl border border-slate-800 bg-[#0d1117] p-5 sm:p-6 transition-all group-hover:border-slate-700 shadow-md">
-                  {/* Top Bar: Dates & Track Badge */}
+              <ScrollReveal key={milestone.id} delay={Math.min(index * 0.06, 0.25)} yOffset={20}>
+                <div
+                  className="p-4 sm:p-5 rounded-2xl border border-indigo-400/20 bg-[#141733]/90 backdrop-blur-md hover:border-indigo-400/40 transition-all shadow-lg"
+                >
+                  {/* Top Row: Date & Badge */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>{milestone.dates}</span>
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-slate-300 flex items-center gap-1.5 font-medium">
+                        <Calendar className="w-3.5 h-3.5 text-pink-400" />
+                        <span>{milestone.dates}</span>
+                      </span>
+                      <span className="text-indigo-400/60">•</span>
+                      <span className="text-xs sm:text-sm text-slate-200 font-semibold">
+                        {milestone.organization}
+                      </span>
+                    </div>
 
-                    <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded-full border ${badgeBg}`}>
+                    <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded-full border font-semibold ${badgeColor}`}>
                       {milestone.badge}
                     </span>
                   </div>
 
-                  {/* Title & Organization */}
-                  <h3 className="text-lg font-bold text-slate-100 group-hover:text-white transition-colors">
+                  {/* Role Title */}
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight">
                     {milestone.title}
                   </h3>
-                  <div className="text-xs text-slate-400 font-medium mb-3">
-                    {milestone.organization}
+
+                  {/* Single Key Impact Point */}
+                  <div className="flex items-start gap-2.5 p-3 rounded-xl bg-[#0c0e22]/70 border border-indigo-950/90 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0 mt-2" />
+                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                      {milestone.bullets[0] || milestone.summary}
+                    </p>
                   </div>
 
-                  {/* Summary */}
-                  <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed font-sans">
-                    {milestone.summary}
-                  </p>
-
-                  {/* Bullets */}
-                  <ul className="space-y-2 mb-4 text-xs text-slate-300/90 font-sans">
-                    {milestone.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${isCode ? 'bg-sky-400' : isCommunity ? 'bg-amber-400' : 'bg-emerald-400'}`} />
-                        <span className="leading-relaxed">{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800/80">
+                  {/* Tech Pills */}
+                  <div className="flex flex-wrap gap-1.5 pt-2.5 border-t border-indigo-900/40">
                     {milestone.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/70 text-slate-300 border border-slate-700/60"
+                        className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#0f1128] text-indigo-200/80 border border-indigo-400/15 font-medium"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             );
           })}
         </div>

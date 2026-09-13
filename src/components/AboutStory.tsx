@@ -1,93 +1,70 @@
-import { motion } from 'motion/react';
 import { THE_STORY, PERSONAL_INFO } from '../data/portfolioData';
-import { Code2, Users, Compass, CheckCircle2, MapPin, GraduationCap } from 'lucide-react';
+import { Quote, BookOpen } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 export default function AboutStory() {
   return (
-    <section id="about" className="py-16 md:py-24 border-b border-slate-800/80">
+    <section id="about" className="py-16 md:py-24 border-b border-indigo-950/40">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-400 mb-2">
-            <Compass className="w-3.5 h-3.5" />
-            <span>THE STORY • DUAL IDENTITY</span>
+        <ScrollReveal>
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161836]/90 text-xs font-mono text-purple-300 mb-3 border border-indigo-400/25">
+              <BookOpen className="w-3.5 h-3.5 text-pink-400" />
+              <span>BACKGROUND &amp; PHILOSOPHY 📖</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-display tracking-tight">
+              The Story Behind the Work
+            </h2>
+            <p className="text-base sm:text-lg text-indigo-200/90 font-medium mt-2 leading-relaxed">
+              {THE_STORY.hook}
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-100 font-display">
-            The Throughline
-          </h2>
-          <p className="text-base text-slate-300 font-medium mt-2 leading-relaxed">
-            {THE_STORY.hook}
-          </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Narrative Content */}
-        <div className="space-y-6 text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+        {/* Narrative Paragraphs */}
+        <div className="space-y-5 text-base sm:text-lg text-slate-200 leading-relaxed font-sans">
           {THE_STORY.paragraphs.map((para, index) => (
-            <motion.p
-              key={index}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-            >
-              {para}
-            </motion.p>
+            <ScrollReveal key={index} delay={index * 0.1} yOffset={16}>
+              <p className="text-slate-200 leading-relaxed">
+                {para}
+              </p>
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* The Throughline Highlight Box */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mt-10 p-6 rounded-xl border border-sky-500/30 bg-gradient-to-r from-sky-950/20 via-slate-900/60 to-amber-950/20 shadow-lg relative overflow-hidden"
-        >
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-sky-400 to-amber-400" />
-          <div className="flex items-start gap-4">
-            <div className="p-2 rounded-lg bg-slate-800/80 border border-slate-700 text-sky-400 shrink-0 mt-0.5">
-              <CheckCircle2 className="w-5 h-5 text-sky-400" />
-            </div>
-            <div>
-              <div className="text-xs font-mono text-sky-300 uppercase tracking-wider mb-1">
-                The Core Principle
+        {/* The Throughline Quote Callout */}
+        <ScrollReveal delay={0.2} yOffset={18}>
+          <div className="mt-8 p-6 sm:p-7 rounded-2xl bg-[#141733]/90 backdrop-blur-md border-l-4 border-l-pink-400 border border-indigo-400/20 shadow-xl">
+            <div className="flex items-start gap-3.5">
+              <Quote className="w-5 h-5 text-pink-400 shrink-0 mt-1" />
+              <div>
+                <div className="text-xs font-mono text-pink-300 uppercase tracking-wider mb-2 font-bold flex items-center gap-1.5">
+                  <span>The Working Principle</span>
+                  <span>✨</span>
+                </div>
+                <p className="text-base sm:text-lg text-white font-medium italic leading-relaxed">
+                  &ldquo;{THE_STORY.throughlineCallout}&rdquo;
+                </p>
+                <div className="text-xs text-indigo-300 font-medium mt-2.5">
+                  — Shravan Shetty
+                </div>
               </div>
-              <p className="text-sm sm:text-base text-slate-100 font-medium italic leading-relaxed">
-                "{THE_STORY.throughlineCallout}"
-              </p>
             </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
 
-        {/* Quick Facts Grid */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800/80">
-          <div className="p-4 rounded-lg bg-[#0d1117] border border-slate-800">
-            <div className="flex items-center gap-2 text-xs font-mono text-sky-400 mb-1">
-              <Code2 className="w-4 h-4" />
-              <span>ENGINEERING</span>
+        {/* Academic Foundation Note */}
+        <ScrollReveal delay={0.25} yOffset={14}>
+          <div className="mt-8 pt-6 border-t border-indigo-900/40 flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm text-slate-300 gap-2">
+            <div>
+              <span className="text-white font-semibold">Education:</span> {PERSONAL_INFO.education.degree}, {PERSONAL_INFO.education.institution} ({PERSONAL_INFO.education.graduation})
             </div>
-            <div className="text-base font-bold text-slate-100">3.4+ Years Frontend</div>
-            <div className="text-xs text-slate-400 mt-0.5">Angular • TypeScript • React</div>
-          </div>
-
-          <div className="p-4 rounded-lg bg-[#0d1117] border border-slate-800">
-            <div className="flex items-center gap-2 text-xs font-mono text-amber-400 mb-1">
-              <Users className="w-4 h-4" />
-              <span>LEADERSHIP</span>
+            <div className="font-mono text-pink-300 font-semibold px-2.5 py-0.5 rounded-full bg-pink-500/10 border border-pink-500/20 w-fit">
+              Score: {PERSONAL_INFO.education.cgpa} 🎓
             </div>
-            <div className="text-base font-bold text-slate-100">500+ Community Fest</div>
-            <div className="text-xs text-slate-400 mt-0.5">10+ Volunteers • BTS Events</div>
           </div>
-
-          <div className="p-4 rounded-lg bg-[#0d1117] border border-slate-800">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-1">
-              <GraduationCap className="w-4 h-4" />
-              <span>EDUCATION</span>
-            </div>
-            <div className="text-base font-bold text-slate-100">BSc Computer Science</div>
-            <div className="text-xs text-slate-400 mt-0.5">Univ. of Mumbai (8.5 CGPA)</div>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
